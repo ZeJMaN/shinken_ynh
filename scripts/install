@@ -13,12 +13,10 @@ fi
 id -u shinken &>/dev/null ||  sudo useradd -d /home/yunohost.app/shinken shinken
 
 # Install required packages
-sudo apt-get install -y python-cherrypy3 python-pip python-pycurl nagios-plugins
-sudo bash -c "pip install shinken"
+sudo apt-get install -y -qq python-cherrypy3 python-pip python-pycurl nagios-plugins mongodb
+sudo bash -c "pip install shinken pymongo>=3.0.3 requests arrow bottle==0.12.8 passlib"
 
 # prepare shinken
-sudo pip install pymongo>=3.0.3 requests arrow bottle==0.12.8 passlib
-sudo apt-get install mongodb -y
 sudo su -c "shinken --init" -l shinken
 sudo su -c "shinken install webui2" -l shinken
 
@@ -34,6 +32,11 @@ sudo yunohost service add shinken
 sudo sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/shinken.conf
 
+# configure shinken 
+sudo rm /etc/shinken/modules/webui2.cfg
+sudo cp ../conf/webui2.cfg /etc/shinken/modules/webui2.cfg
+sudo rm /etc/shinken/brokers/broker-master.cfg
+sudo cp ../conf/broker-master.cfg /etc/shinken/brokers/broker-master.cfg
 
 # Add new shinken service
 sudo update-rc.d shinken defaults

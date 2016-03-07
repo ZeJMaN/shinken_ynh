@@ -19,8 +19,8 @@ sudo bash -c "pip install shinken"
 # prepare shinken
 sudo pip install pymongo>=3.0.3 requests arrow bottle==0.12.8 passlib
 sudo apt-get install mongodb -y
-sudo su -c shinken --int -l shinken
-sudo su -c shinken install webui2 -l shinken
+sudo su -c "shinken --init" -l shinken
+sudo su -c "shinken install webui2" -l shinken
 
 
 # Remove trailing "/" for next commands

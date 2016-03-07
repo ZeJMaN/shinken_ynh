@@ -1,0 +1,32 @@
+{
+  "name": "Shinken",
+  "id": "shinken",
+  "description": {
+    "en": "Shinken is an open source computer system and network monitoring software application compatible with Nagios. It watches hosts and services, gathers performance data and alerts users when error conditions occur and again when the conditions clear."
+  },
+  "developer": {
+    "name": "Jeremy MANSON",
+    "email": "jeremy.manson@jmanson.fr",
+    "url": "https://www.jmanson.fr"
+  },
+  "multi_instance": "false",
+  "arguments": {
+    "install": [
+      {
+        "name": "domain",
+        "ask": {
+          "en": "Choose a domain for Shinken"
+        },
+        "example": "domain.org"
+      },
+      {
+        "name": "path",
+        "ask": {
+          "en": "Choose a path for Shinken"
+        },
+        "example": "/shinken",
+        "default": "/shinken"
+      }
+    ]
+  }
+}

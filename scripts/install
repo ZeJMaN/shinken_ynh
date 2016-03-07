@@ -38,6 +38,10 @@ sudo cp ../conf/webui2.cfg /etc/shinken/modules/webui2.cfg
 sudo rm /etc/shinken/brokers/broker-master.cfg
 sudo cp ../conf/broker-master.cfg /etc/shinken/brokers/broker-master.cfg
 
+# Fix #407: 404 on Dashboard currently
+sed  's/routes/route/g' /var/lib/shinken/modules/webui2/plugins/dashboard/dashboard.py > /tmp/dashboard.py
+sudo mv /tmp/dashboard.py /var/lib/shinken/modules/webui2/plugins/dashboard/dashboard.py
+
 # Add new shinken service
 sudo update-rc.d shinken defaults
 
